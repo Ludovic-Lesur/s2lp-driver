@@ -214,7 +214,6 @@ typedef struct {
 /*** S2LP local global variables ***/
 
 #ifdef S2LP_DRIVER_RX_ENABLE
-// @formatter:off
 static const uint16_t S2LP_RX_BANDWIDTH_26M[S2LP_RX_BANDWIDTH_TABLE_SIZE] = {
     8001, 7951, 7684, 7368, 7051, 6709, 6423, 5867, 5414,
     4509, 4259, 4032, 3808, 3621, 3417, 3254, 2945, 2703,
@@ -227,7 +226,6 @@ static const uint16_t S2LP_RX_BANDWIDTH_26M[S2LP_RX_BANDWIDTH_TABLE_SIZE] = {
     35,   33,   31,   30,   28,   27,   25,   23,   21,
     18,   17,   16,   15,   14,   13,   13,   12,   11
 };
-// @formatter:on
 #endif
 
 /*** S2LP local functions ***/

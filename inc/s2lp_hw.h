@@ -38,8 +38,8 @@ S2LP_status_t S2LP_HW_de_init(void);
 
 /*!******************************************************************
  * \fn S2LP_status_t S2LP_HW_spi_write_read_8(uint8_t* tx_data, uint8_t* rx_data, uint8_t transfer_size)
- * \brief Write data to transceiver over SPI interface.
- * \param[in]   tx_data: Byte array to send.
+ * \brief Transfer data to transceiver over SPI interface.
+ * \param[in]   tx_data: Bytes array to send.
  * \param[in]   transfer_size: Number of bytes to send and receive.
  * \param[out]  rx_data: Pointer to the received bytes.
  * \retval      Function execution status.
