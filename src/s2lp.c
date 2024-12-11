@@ -312,11 +312,11 @@ static S2LP_status_t _S2LP_compute_mantissa_exponent_datarate(uint32_t datarate_
     // Compute mantissa.
     if (e == 0) {
         tmp_u64 = ((uint64_t) datarate_bps << 32);
-        (datarate_setting->mantissa) = ((tmp_u64) / ((uint64_t) S2LP_FDIG_HZ));
+        (datarate_setting->mantissa) = (uint16_t) ((tmp_u64) / ((uint64_t) S2LP_FDIG_HZ));
     }
     else {
         tmp_u64 = ((uint64_t) datarate_bps << (33 - e));
-        (datarate_setting->mantissa) = ((tmp_u64) / ((uint64_t) S2LP_FDIG_HZ)) - S2LP_DATARATE_MANTISSA_OFFSET;
+        (datarate_setting->mantissa) = (uint16_t) (((tmp_u64) / ((uint64_t) S2LP_FDIG_HZ)) - S2LP_DATARATE_MANTISSA_OFFSET);
     }
 errors:
     return status;
@@ -369,11 +369,11 @@ static S2LP_status_t _S2LP_compute_mantissa_exponent_deviation(uint32_t deviatio
     // Compute mantissa.
     if (e == 0) {
         tmp_u64 = ((uint64_t) deviation_hz << 22);
-        (deviation_setting->mantissa) = ((tmp_u64) / ((uint64_t) S2LP_DRIVER_XO_FREQUENCY_HZ));
+        (deviation_setting->mantissa) = (uint16_t) ((tmp_u64) / ((uint64_t) S2LP_DRIVER_XO_FREQUENCY_HZ));
     }
     else {
         tmp_u64 = ((uint64_t) deviation_hz << (23 - e));
-        (deviation_setting->mantissa) = ((tmp_u64) / ((uint64_t) S2LP_DRIVER_XO_FREQUENCY_HZ)) - S2LP_DEVIATION_MANTISSA_OFFSET;
+        (deviation_setting->mantissa) = (uint16_t) (((tmp_u64) / ((uint64_t) S2LP_DRIVER_XO_FREQUENCY_HZ)) - S2LP_DEVIATION_MANTISSA_OFFSET);
     }
 errors:
     return status;
@@ -711,7 +711,7 @@ S2LP_status_t S2LP_set_fsk_deviation(uint32_t deviation_hz) {
     status = _S2LP_compute_mantissa_exponent_deviation(deviation_hz, &deviation_setting);
     if (status != S2LP_SUCCESS) goto errors;
     // Write registers.
-    status = _S2LP_write_register(S2LP_REGISTER_MOD0, deviation_setting.mantissa);
+    status = _S2LP_write_register(S2LP_REGISTER_MOD0, (uint8_t) (deviation_setting.mantissa));
     if (status != S2LP_SUCCESS) goto errors;
     status = _S2LP_read_register(S2LP_REGISTER_MOD1, &mod1_reg_value);
     if (status != S2LP_SUCCESS) goto errors;
@@ -733,9 +733,9 @@ S2LP_status_t S2LP_set_datarate(uint32_t datarate_bps) {
     status = _S2LP_compute_mantissa_exponent_datarate(datarate_bps, &datarate_setting);
     if (status != S2LP_SUCCESS) goto errors;
     // Write registers.
-    status = _S2LP_write_register(S2LP_REGISTER_MOD4, (datarate_setting.mantissa >> 8) & 0x00FF);
+    status = _S2LP_write_register(S2LP_REGISTER_MOD4, (uint8_t) ((datarate_setting.mantissa >> 8) & 0x00FF));
     if (status != S2LP_SUCCESS) goto errors;
-    status = _S2LP_write_register(S2LP_REGISTER_MOD3, (datarate_setting.mantissa >> 0) & 0x00FF);
+    status = _S2LP_write_register(S2LP_REGISTER_MOD3, (uint8_t) ((datarate_setting.mantissa >> 0) & 0x00FF));
     if (status != S2LP_SUCCESS) goto errors;
     status = _S2LP_read_register(S2LP_REGISTER_MOD2, &mod2_reg_value);
     if (status != S2LP_SUCCESS) goto errors;
@@ -837,8 +837,8 @@ S2LP_status_t S2LP_configure_irq(S2LP_irq_index_t irq_index, uint8_t irq_enable)
     status = _S2LP_read_register((S2LP_REGISTER_IRQ_MASK0 - reg_addr_offset), &reg_value);
     if (status != S2LP_SUCCESS) goto errors;
     // Set bit.
-    reg_value &= ~(0b1 << irq_bit_offset);
-    reg_value |= (((irq_enable == 0) ? 0b0 : 0b1) << irq_bit_offset);
+    reg_value &= (uint8_t) (~(0b1 << irq_bit_offset));
+    reg_value |= (uint8_t) (((irq_enable == 0) ? 0b0 : 0b1) << irq_bit_offset);
     // Program register.
     status = _S2LP_write_register((S2LP_REGISTER_IRQ_MASK0 - reg_addr_offset), reg_value);
     if (status != S2LP_SUCCESS) goto errors;
@@ -1026,7 +1026,7 @@ S2LP_status_t S2LP_set_rx_bandwidth(uint32_t rx_bandwidth_hz, S2LP_afc_mode_t af
     status = _S2LP_compute_mantissa_exponent_rx_bandwidth(rx_bandwidth_hz, &rx_bandwidth_setting);
     if (status != S2LP_SUCCESS) goto errors;
     // Write register.
-    reg_value = ((rx_bandwidth_setting.mantissa << 4) & 0xF0) + (rx_bandwidth_setting.exponent & 0x0F);
+    reg_value = (uint8_t) (((rx_bandwidth_setting.mantissa << 4) & 0xF0) + (rx_bandwidth_setting.exponent & 0x0F));
     status = _S2LP_write_register(S2LP_REGISTER_CHFLT, reg_value);
     if (status != S2LP_SUCCESS) goto errors;
     // Read register.
