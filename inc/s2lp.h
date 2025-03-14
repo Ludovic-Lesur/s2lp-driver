@@ -11,6 +11,7 @@
 #ifndef S2LP_DRIVER_DISABLE_FLAGS_FILE
 #include "s2lp_driver_flags.h"
 #endif
+#include "error.h"
 #include "types.h"
 
 /*** S2LP macros ***/
@@ -62,7 +63,7 @@ typedef enum {
     S2LP_ERROR_RX_SOURCE,
     S2LP_ERROR_RX_FIFO_DATA_SIZE,
     // Low level drivers errors.
-    S2LP_ERROR_BASE_SPI = 0x0100,
+    S2LP_ERROR_BASE_SPI = ERROR_BASE_STEP,
     S2LP_ERROR_BASE_DELAY = (S2LP_ERROR_BASE_SPI + S2LP_DRIVER_SPI_ERROR_BASE_LAST),
     // Last base value.
     S2LP_ERROR_BASE_LAST = (S2LP_ERROR_BASE_DELAY + S2LP_DRIVER_DELAY_ERROR_BASE_LAST)
