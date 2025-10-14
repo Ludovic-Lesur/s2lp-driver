@@ -57,7 +57,6 @@ typedef enum {
     S2LP_ERROR_CRC_MODE,
     S2LP_ERROR_RX_BANDWIDTH_UNDERFLOW,
     S2LP_ERROR_RX_BANDWIDTH_OVERFLOW,
-    S2LP_ERROR_AFC_MODE,
     S2LP_ERROR_RSSI_THRESHOLD,
     S2LP_ERROR_RSSI_TYPE,
     S2LP_ERROR_RX_SOURCE,
@@ -319,17 +318,6 @@ typedef enum {
     S2LP_CRC_MODE_LAST
 } S2LP_crc_mode_t;
 
-/*!******************************************************************
- * \enum S2LP_afc_mode_t
- * \brief S2LP AFC correction modes.
- *******************************************************************/
-typedef enum {
-    S2LP_AFC_MODE_DISABLE = 0,
-    S2LP_AFC_MODE_CONTINUOUS,
-    S2LP_AFC_MODE_FREEZE,
-    S2LP_AFC_MODE_LAST
-} S2LP_afc_mode_t;
-
 /*** S2LP functions ***/
 
 /*!******************************************************************
@@ -554,14 +542,24 @@ S2LP_status_t S2LP_write_fifo(uint8_t* tx_data, uint8_t tx_data_length_bytes);
 
 #ifdef S2LP_DRIVER_RX_ENABLE
 /*!******************************************************************
- * \fn S2LP_status_t S2LP_set_rx_bandwidth(uint32_t rx_bandwidth_hz, S2LP_afc_mode_t afc_mode)
+ * \fn S2LP_status_t S2LP_set_rx_bandwidth(uint32_t rx_bandwidth_hz)
  * \brief Set S2LP receiver bandwidth.
  * \param[in]   rx_bandwidth_hz: RX channel bandwidth in Hz
- * \param[in]   afc_mode: AFC correction mode.
  * \param[out]  none
  * \retval      Function execution status.
  *******************************************************************/
-S2LP_status_t S2LP_set_rx_bandwidth(uint32_t rx_bandwidth_hz, S2LP_afc_mode_t afc_mode);
+S2LP_status_t S2LP_set_rx_bandwidth(uint32_t rx_bandwidth_hz);
+#endif
+
+#ifdef S2LP_DRIVER_RX_ENABLE
+/*!******************************************************************
+ * \fn S2LP_status_t S2LP_set_lna_configuration(uint8_t agc_enable)
+ * \brief Configure S2LP internal LNA.
+ * \param[in]   agc_enable: Enable or disable the AGC.
+ * \param[out]  none
+ * \retval      Function execution status.
+ *******************************************************************/
+S2LP_status_t S2LP_set_lna_configuration(uint8_t agc_enable);
 #endif
 
 #ifdef S2LP_DRIVER_RX_ENABLE

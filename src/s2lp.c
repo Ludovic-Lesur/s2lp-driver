@@ -559,6 +559,12 @@ S2LP_status_t S2LP_set_common_configuration(void) {
     reg_value |= 0x80;
     status = _S2LP_write_register(S2LP_REGISTER_MOD1, reg_value);
     if (status != S2LP_SUCCESS) goto errors;
+    // Disable AFC.
+    status = _S2LP_read_register(S2LP_REGISTER_AFC2, &reg_value);
+    if (status != S2LP_SUCCESS) goto errors;
+    reg_value &= 0x1F;
+    status = _S2LP_write_register(S2LP_REGISTER_AFC2, reg_value);
+    if (status != S2LP_SUCCESS) goto errors;
 errors:
     return status;
 }
@@ -1017,7 +1023,7 @@ errors:
 
 #ifdef S2LP_DRIVER_RX_ENABLE
 /*******************************************************************/
-S2LP_status_t S2LP_set_rx_bandwidth(uint32_t rx_bandwidth_hz, S2LP_afc_mode_t afc_mode) {
+S2LP_status_t S2LP_set_rx_bandwidth(uint32_t rx_bandwidth_hz) {
     // Local variables.
     S2LP_status_t status = S2LP_SUCCESS;
     S2LP_mantissa_exponent_t rx_bandwidth_setting = { 0, 0 };
@@ -1029,28 +1035,38 @@ S2LP_status_t S2LP_set_rx_bandwidth(uint32_t rx_bandwidth_hz, S2LP_afc_mode_t af
     reg_value = (uint8_t) (((rx_bandwidth_setting.mantissa << 4) & 0xF0) + (rx_bandwidth_setting.exponent & 0x0F));
     status = _S2LP_write_register(S2LP_REGISTER_CHFLT, reg_value);
     if (status != S2LP_SUCCESS) goto errors;
+errors:
+    return status;
+}
+#endif
+
+#ifdef S2LP_DRIVER_RX_ENABLE
+/*******************************************************************/
+S2LP_status_t S2LP_set_lna_configuration(uint8_t agc_enable) {
+    // Local variables.
+    S2LP_status_t status = S2LP_SUCCESS;
+    uint8_t reg_value = 0;
     // Read register.
-    status = _S2LP_read_register(S2LP_REGISTER_AFC2, &reg_value);
+    status = _S2LP_read_register(S2LP_REGISTER_AGCCTRL0, &reg_value);
     if (status != S2LP_SUCCESS) goto errors;
     // Reset bits.
-    reg_value &= 0x1F;
-    // Set AFC mode.
-    switch (afc_mode) {
-    case S2LP_AFC_MODE_DISABLE:
-        // Nothing to do.
-        break;
-    case S2LP_AFC_MODE_CONTINUOUS:
-        reg_value |= 0x40;
-        break;
-    case S2LP_AFC_MODE_FREEZE:
-        reg_value |= 0xC0;
-        break;
-    default:
-        status = S2LP_ERROR_AFC_MODE;
-        goto errors;
+    if (agc_enable == 0) {
+        reg_value &= 0x7F;
+    }
+    else {
+        reg_value |= 0x80;
     }
     // Program register.
-    status = _S2LP_write_register(S2LP_REGISTER_AFC2, reg_value);
+    status = _S2LP_write_register(S2LP_REGISTER_AGCCTRL0, reg_value);
+    if (status != S2LP_SUCCESS) goto errors;
+    // Program default values.
+    status = _S2LP_write_register(S2LP_REGISTER_AGCCTRL1, 0x59);
+    if (status != S2LP_SUCCESS) goto errors;
+    status = _S2LP_write_register(S2LP_REGISTER_AGCCTRL2, 0x22);
+    if (status != S2LP_SUCCESS) goto errors;
+    status = _S2LP_write_register(S2LP_REGISTER_AGCCTRL3, 0x10);
+    if (status != S2LP_SUCCESS) goto errors;
+    status = _S2LP_write_register(S2LP_REGISTER_AGCCTRL4, 0x54);
     if (status != S2LP_SUCCESS) goto errors;
 errors:
     return status;
