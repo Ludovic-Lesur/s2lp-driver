@@ -29,3 +29,23 @@ Here is the versions compatibility table:
 | `S2LP_DRIVER_XO_FREQUENCY_HZ` | `<value>` | Oscillator frequency in Hz. |
 | `S2LP_DRIVER_TX_ENABLE` | `defined` / `undefined` | Enable radio transmission functions. |
 | `S2LP_DRIVER_RX_ENABLE` | `defined` / `undefined` | Enable radio reception functions. |
+
+# Build
+
+A static library can be compiled by command line with `cmake`.
+
+```bash
+mkdir build
+cd build
+cmake -DCMAKE_TOOLCHAIN_FILE="<toolchain_file_path>" \
+      -DTOOLCHAIN_PATH="<arm-none-eabi-gcc_path>" \
+      -DTYPES_PATH="<types_file_path>" \
+      -DEMBEDDED_UTILS_PATH="<embedded-utils_path>" \
+      -DS2LP_DRIVER_SPI_ERROR_BASE_LAST=0 \
+      -DS2LP_DRIVER_DELAY_ERROR_BASE_LAST=0 \
+      -DS2LP_DRIVER_XO_FREQUENCY_HZ=50000000 \
+      -DS2LP_DRIVER_TX_ENABLE=ON \
+      -DS2LP_DRIVER_RX_ENABLE=ON \
+      -G "Unix Makefiles" ..
+make all
+```
