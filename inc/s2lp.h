@@ -16,6 +16,12 @@
 
 /*** S2LP macros ***/
 
+#define S2LP_RF_FREQUENCY_HZ_MIN        826000000
+#define S2LP_RF_FREQUENCY_HZ_MAX        958000000
+
+#define S2LP_RF_OUTPUT_POWER_MIN        (-49)
+#define S2LP_RF_OUTPUT_POWER_MAX        14
+
 #define S2LP_FIFO_SIZE_BYTES            128
 #define S2LP_EXIT_SHUTDOWN_DELAY_MS     50
 

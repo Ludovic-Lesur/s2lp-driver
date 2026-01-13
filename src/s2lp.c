@@ -39,9 +39,6 @@
 #define S2LP_FDIG_HZ                            S2LP_DRIVER_XO_FREQUENCY_HZ
 #define S2LP_IF_OFFSET_ANA                      0xB8
 #endif
-// RF frequency range.
-#define S2LP_RF_FREQUENCY_HZ_MIN                826000000
-#define S2LP_RF_FREQUENCY_HZ_MAX                958000000
 // Frequency deviation range.
 #define S2LP_DEVIATION_HZ_MIN                   150
 #define S2LP_DEVIATION_HZ_MAX                   500000
@@ -59,9 +56,6 @@
 #define S2LP_DATARATE_MANTISSA_MAX              65535
 #define S2LP_DATARATE_MANTISSA_OFFSET           65536
 #define S2LP_DATARATE_EXPONENT_MAX              14
-// RF output power range.
-#define S2LP_RF_OUTPUT_POWER_MIN                -49
-#define S2LP_RF_OUTPUT_POWER_MAX                14
 // Sync word max length.
 #define S2LP_SYNC_WORD_LENGTH_BITS_MAX          32
 // RSSI offset.
