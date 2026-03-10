@@ -937,11 +937,11 @@ S2LP_status_t S2LP_set_rf_output_power(int8_t output_power_dbm) {
     uint8_t reg_value = 0;
     uint8_t pa_reg_value = 0;
     // Check parameter.
-    if (output_power_dbm > S2LP_RF_OUTPUT_POWER_MAX) {
+    if (output_power_dbm > S2LP_RF_OUTPUT_POWER_DBM_MAX) {
         status = S2LP_ERROR_RF_OUTPUT_POWER_OVERFLOW;
         goto errors;
     }
-    if (output_power_dbm < S2LP_RF_OUTPUT_POWER_MIN) {
+    if (output_power_dbm < S2LP_RF_OUTPUT_POWER_DBM_MIN) {
         status = S2LP_ERROR_RF_OUTPUT_POWER_UNDERFLOW;
         goto errors;
     }
