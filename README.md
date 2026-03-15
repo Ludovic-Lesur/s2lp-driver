@@ -13,6 +13,7 @@ Here is the versions compatibility table:
 
 | **s2lp-driver** | **embedded-utils** |
 |:---:|:---:|
+| [sw3.1](https://github.com/Ludovic-Lesur/s2lp-driver/releases/tag/sw3.1) | >= [sw5.0](https://github.com/Ludovic-Lesur/embedded-utils/releases/tag/sw5.0) |
 | [sw3.0](https://github.com/Ludovic-Lesur/s2lp-driver/releases/tag/sw3.0) | >= [sw5.0](https://github.com/Ludovic-Lesur/embedded-utils/releases/tag/sw5.0) |
 | [sw2.2](https://github.com/Ludovic-Lesur/s2lp-driver/releases/tag/sw2.2) | >= [sw5.0](https://github.com/Ludovic-Lesur/embedded-utils/releases/tag/sw5.0) |
 | [sw2.1](https://github.com/Ludovic-Lesur/s2lp-driver/releases/tag/sw2.1) | >= [sw5.0](https://github.com/Ludovic-Lesur/embedded-utils/releases/tag/sw5.0) |
