@@ -20,7 +20,7 @@
 /*******************************************************************/
 S2LP_status_t __attribute__((weak)) S2LP_HW_init(void) {
     // Local variables.
-    S2LP_status_t status = S2LP_SUCCESS;
+    S2LP_status_t status = S2LP_ERROR_HW_FUNCTION_NOT_IMPLEMENTED;
     /* To be implemented */
     return status;
 }
@@ -28,7 +28,7 @@ S2LP_status_t __attribute__((weak)) S2LP_HW_init(void) {
 /*******************************************************************/
 S2LP_status_t __attribute__((weak)) S2LP_HW_de_init(void) {
     // Local variables.
-    S2LP_status_t status = S2LP_SUCCESS;
+    S2LP_status_t status = S2LP_ERROR_HW_FUNCTION_NOT_IMPLEMENTED;
     /* To be implemented */
     return status;
 }
@@ -36,7 +36,7 @@ S2LP_status_t __attribute__((weak)) S2LP_HW_de_init(void) {
 /*******************************************************************/
 S2LP_status_t __attribute__((weak)) S2LP_HW_spi_write_read_8(uint8_t* tx_data, uint8_t* rx_data, uint8_t transfer_size) {
     // Local variables.
-    S2LP_status_t status = S2LP_SUCCESS;
+    S2LP_status_t status = S2LP_ERROR_HW_FUNCTION_NOT_IMPLEMENTED;
     /* To be implemented */
     UNUSED(tx_data);
     UNUSED(rx_data);
@@ -47,7 +47,7 @@ S2LP_status_t __attribute__((weak)) S2LP_HW_spi_write_read_8(uint8_t* tx_data, u
 /*******************************************************************/
 S2LP_status_t __attribute__((weak)) S2LP_HW_set_sdn_gpio(uint8_t state) {
     // Local variables.
-    S2LP_status_t status = S2LP_SUCCESS;
+    S2LP_status_t status = S2LP_ERROR_HW_FUNCTION_NOT_IMPLEMENTED;
     /* To be implemented */
     UNUSED(state);
     return status;
@@ -56,7 +56,7 @@ S2LP_status_t __attribute__((weak)) S2LP_HW_set_sdn_gpio(uint8_t state) {
 /*******************************************************************/
 S2LP_status_t __attribute__((weak)) S2LP_HW_delay_milliseconds(uint32_t delay_ms) {
     // Local variables.
-    S2LP_status_t status = S2LP_SUCCESS;
+    S2LP_status_t status = S2LP_ERROR_HW_FUNCTION_NOT_IMPLEMENTED;
     /* To be implemented */
     UNUSED(delay_ms);
     return status;
