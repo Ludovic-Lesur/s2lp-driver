@@ -207,7 +207,7 @@ typedef enum {
  * \brief S2LP GPIO input functions.
  *******************************************************************/
 typedef enum {
-    S2LP_GPIO_INPUT_FUNCTION_TX_COMMAND,
+    S2LP_GPIO_INPUT_FUNCTION_TX_COMMAND = 0,
     S2LP_GPIO_INPUT_FUNCTION_RX_COMMAND,
     S2LP_GPIO_INPUT_FUNCTION_TX_DATA,
     S2LP_GPIO_INPUT_FUNCTION_WAKE_UP,
@@ -295,7 +295,7 @@ typedef enum {
  * \brief S2LP RSSI measurement methods.
  *******************************************************************/
 typedef enum {
-    S2LP_RSSI_TYPE_RUN,
+    S2LP_RSSI_TYPE_RUN = 0,
     S2LP_RSSI_TYPE_SYNC_WORD,
     S2LP_RSSI_TYPE_LAST
 } S2LP_rssi_t;
